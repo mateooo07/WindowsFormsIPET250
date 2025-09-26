@@ -25,13 +25,8 @@ namespace Ejercicio1WF
 
         protected void AbrirConexion()
         {
-            if (conexion == null)
-                conexion = new SqlConnection(connectionString);
-
             if (conexion.State != ConnectionState.Open)
                 conexion.Open();
-
-            comando.Connection = conexion;
         }
 
         protected void CerrarConexion()
