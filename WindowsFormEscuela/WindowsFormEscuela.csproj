@@ -97,6 +97,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormsModelos\DocenteForm.resx">
+      <DependentUpon>DocenteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormsModelos\EstudianteForm.resx">
       <DependentUpon>EstudianteForm.cs</DependentUpon>
     </EmbeddedResource>

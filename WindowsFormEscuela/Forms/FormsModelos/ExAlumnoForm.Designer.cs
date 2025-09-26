@@ -49,6 +49,7 @@
             this.guardarBtn = new System.Windows.Forms.Button();
             this.groupBoxCRUD = new System.Windows.Forms.GroupBox();
             this.groupBoxBuscar = new System.Windows.Forms.GroupBox();
+            this.habilitarButton = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.nombreBLabel = new System.Windows.Forms.Label();
             this.edadBLabel = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.promedioBLabel = new System.Windows.Forms.Label();
             this.txtCarreraBuscar = new System.Windows.Forms.TextBox();
             this.txtPromedioBuscar = new System.Windows.Forms.TextBox();
-            this.habilitarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exAlumnoDGV)).BeginInit();
             this.groupBoxCRUD.SuspendLayout();
             this.groupBoxBuscar.SuspendLayout();
@@ -304,6 +304,19 @@
             this.groupBoxBuscar.TabIndex = 36;
             this.groupBoxBuscar.TabStop = false;
             // 
+            // habilitarButton
+            // 
+            this.habilitarButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.habilitarButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.habilitarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.habilitarButton.Location = new System.Drawing.Point(26, 139);
+            this.habilitarButton.Name = "habilitarButton";
+            this.habilitarButton.Size = new System.Drawing.Size(91, 23);
+            this.habilitarButton.TabIndex = 37;
+            this.habilitarButton.Text = "HABILITAR";
+            this.habilitarButton.UseVisualStyleBackColor = false;
+            this.habilitarButton.Click += new System.EventHandler(this.habilitarButton_Click_1);
+            // 
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -392,25 +405,12 @@
             this.txtPromedioBuscar.Size = new System.Drawing.Size(199, 21);
             this.txtPromedioBuscar.TabIndex = 25;
             // 
-            // habilitarButton
-            // 
-            this.habilitarButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.habilitarButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.habilitarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.habilitarButton.Location = new System.Drawing.Point(26, 139);
-            this.habilitarButton.Name = "habilitarButton";
-            this.habilitarButton.Size = new System.Drawing.Size(91, 23);
-            this.habilitarButton.TabIndex = 37;
-            this.habilitarButton.Text = "HABILITAR";
-            this.habilitarButton.UseVisualStyleBackColor = false;
-            this.habilitarButton.Click += new System.EventHandler(this.habilitarButton_Click_1);
-            // 
             // ExAlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1001, 538);
+            this.ClientSize = new System.Drawing.Size(999, 526);
             this.Controls.Add(this.groupBoxBuscar);
             this.Controls.Add(this.groupBoxCRUD);
             this.Controls.Add(this.retrocederBtn);

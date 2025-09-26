@@ -30,17 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocenteForm));
             this.groupBoxBuscar = new System.Windows.Forms.GroupBox();
+            this.salarioBLabel = new System.Windows.Forms.Label();
+            this.txtSalarioBuscar = new System.Windows.Forms.TextBox();
             this.habilitarButton = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.nombreBLabel = new System.Windows.Forms.Label();
             this.edadBLabel = new System.Windows.Forms.Label();
-            this.carreraBLabel = new System.Windows.Forms.Label();
+            this.antiguedadBLabel = new System.Windows.Forms.Label();
             this.buscarBtn = new System.Windows.Forms.Button();
             this.txtEdadBuscar = new System.Windows.Forms.TextBox();
-            this.promedioBLabel = new System.Windows.Forms.Label();
-            this.txtCarreraBuscar = new System.Windows.Forms.TextBox();
-            this.txtPromedioBuscar = new System.Windows.Forms.TextBox();
+            this.puestoBLabel = new System.Windows.Forms.Label();
+            this.txtAntiguedadBuscar = new System.Windows.Forms.TextBox();
+            this.txtPuestoBuscar = new System.Windows.Forms.TextBox();
             this.groupBoxCRUD = new System.Windows.Forms.GroupBox();
+            this.salarioLabel = new System.Windows.Forms.Label();
+            this.txtSalario = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.guardarBtn = new System.Windows.Forms.Button();
             this.nombreLabel = new System.Windows.Forms.Label();
@@ -51,40 +55,55 @@
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.editarBtn = new System.Windows.Forms.Button();
             this.puestoLabel = new System.Windows.Forms.Label();
-            this.txtCarrera = new System.Windows.Forms.TextBox();
+            this.txtAntiguedad = new System.Windows.Forms.TextBox();
             this.añadirBtn = new System.Windows.Forms.Button();
-            this.txtPromedio = new System.Windows.Forms.TextBox();
+            this.txtPuesto = new System.Windows.Forms.TextBox();
             this.retrocederBtn = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.exAlumnoDGV = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.docenteDGV = new System.Windows.Forms.DataGridView();
             this.groupBoxBuscar.SuspendLayout();
             this.groupBoxCRUD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exAlumnoDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docenteDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxBuscar
             // 
-            this.groupBoxBuscar.Controls.Add(this.label2);
-            this.groupBoxBuscar.Controls.Add(this.textBox2);
+            this.groupBoxBuscar.Controls.Add(this.salarioBLabel);
+            this.groupBoxBuscar.Controls.Add(this.txtSalarioBuscar);
             this.groupBoxBuscar.Controls.Add(this.habilitarButton);
             this.groupBoxBuscar.Controls.Add(this.txtNombreBuscar);
             this.groupBoxBuscar.Controls.Add(this.nombreBLabel);
             this.groupBoxBuscar.Controls.Add(this.edadBLabel);
-            this.groupBoxBuscar.Controls.Add(this.carreraBLabel);
+            this.groupBoxBuscar.Controls.Add(this.antiguedadBLabel);
             this.groupBoxBuscar.Controls.Add(this.buscarBtn);
             this.groupBoxBuscar.Controls.Add(this.txtEdadBuscar);
-            this.groupBoxBuscar.Controls.Add(this.promedioBLabel);
-            this.groupBoxBuscar.Controls.Add(this.txtCarreraBuscar);
-            this.groupBoxBuscar.Controls.Add(this.txtPromedioBuscar);
+            this.groupBoxBuscar.Controls.Add(this.puestoBLabel);
+            this.groupBoxBuscar.Controls.Add(this.txtAntiguedadBuscar);
+            this.groupBoxBuscar.Controls.Add(this.txtPuestoBuscar);
             this.groupBoxBuscar.Location = new System.Drawing.Point(537, 13);
             this.groupBoxBuscar.Name = "groupBoxBuscar";
             this.groupBoxBuscar.Size = new System.Drawing.Size(458, 178);
             this.groupBoxBuscar.TabIndex = 41;
             this.groupBoxBuscar.TabStop = false;
+            // 
+            // salarioBLabel
+            // 
+            this.salarioBLabel.AutoSize = true;
+            this.salarioBLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salarioBLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.salarioBLabel.Location = new System.Drawing.Point(25, 111);
+            this.salarioBLabel.Name = "salarioBLabel";
+            this.salarioBLabel.Size = new System.Drawing.Size(57, 15);
+            this.salarioBLabel.TabIndex = 38;
+            this.salarioBLabel.Text = "Salario:";
+            // 
+            // txtSalarioBuscar
+            // 
+            this.txtSalarioBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSalarioBuscar.Location = new System.Drawing.Point(88, 108);
+            this.txtSalarioBuscar.Name = "txtSalarioBuscar";
+            this.txtSalarioBuscar.Size = new System.Drawing.Size(200, 21);
+            this.txtSalarioBuscar.TabIndex = 39;
             // 
             // habilitarButton
             // 
@@ -97,6 +116,7 @@
             this.habilitarButton.TabIndex = 37;
             this.habilitarButton.Text = "HABILITAR";
             this.habilitarButton.UseVisualStyleBackColor = false;
+            this.habilitarButton.Click += new System.EventHandler(this.habilitarButton_Click);
             // 
             // txtNombreBuscar
             // 
@@ -128,16 +148,16 @@
             this.edadBLabel.TabIndex = 7;
             this.edadBLabel.Text = "Edad:";
             // 
-            // carreraBLabel
+            // antiguedadBLabel
             // 
-            this.carreraBLabel.AutoSize = true;
-            this.carreraBLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.carreraBLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.carreraBLabel.Location = new System.Drawing.Point(245, 60);
-            this.carreraBLabel.Name = "carreraBLabel";
-            this.carreraBLabel.Size = new System.Drawing.Size(83, 15);
-            this.carreraBLabel.TabIndex = 21;
-            this.carreraBLabel.Text = "Antiguedad:";
+            this.antiguedadBLabel.AutoSize = true;
+            this.antiguedadBLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.antiguedadBLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.antiguedadBLabel.Location = new System.Drawing.Point(245, 60);
+            this.antiguedadBLabel.Name = "antiguedadBLabel";
+            this.antiguedadBLabel.Size = new System.Drawing.Size(83, 15);
+            this.antiguedadBLabel.TabIndex = 21;
+            this.antiguedadBLabel.Text = "Antiguedad:";
             // 
             // buscarBtn
             // 
@@ -150,6 +170,7 @@
             this.buscarBtn.TabIndex = 28;
             this.buscarBtn.Text = "BUSCAR";
             this.buscarBtn.UseVisualStyleBackColor = false;
+            this.buscarBtn.Click += new System.EventHandler(this.buscarBtn_Click);
             // 
             // txtEdadBuscar
             // 
@@ -159,37 +180,37 @@
             this.txtEdadBuscar.Size = new System.Drawing.Size(200, 21);
             this.txtEdadBuscar.TabIndex = 9;
             // 
-            // promedioBLabel
+            // puestoBLabel
             // 
-            this.promedioBLabel.AutoSize = true;
-            this.promedioBLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.promedioBLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.promedioBLabel.Location = new System.Drawing.Point(245, 20);
-            this.promedioBLabel.Name = "promedioBLabel";
-            this.promedioBLabel.Size = new System.Drawing.Size(55, 15);
-            this.promedioBLabel.TabIndex = 23;
-            this.promedioBLabel.Text = "Puesto:";
+            this.puestoBLabel.AutoSize = true;
+            this.puestoBLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.puestoBLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.puestoBLabel.Location = new System.Drawing.Point(245, 20);
+            this.puestoBLabel.Name = "puestoBLabel";
+            this.puestoBLabel.Size = new System.Drawing.Size(55, 15);
+            this.puestoBLabel.TabIndex = 23;
+            this.puestoBLabel.Text = "Puesto:";
             // 
-            // txtCarreraBuscar
+            // txtAntiguedadBuscar
             // 
-            this.txtCarreraBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCarreraBuscar.Location = new System.Drawing.Point(248, 77);
-            this.txtCarreraBuscar.Name = "txtCarreraBuscar";
-            this.txtCarreraBuscar.Size = new System.Drawing.Size(199, 21);
-            this.txtCarreraBuscar.TabIndex = 24;
+            this.txtAntiguedadBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAntiguedadBuscar.Location = new System.Drawing.Point(248, 77);
+            this.txtAntiguedadBuscar.Name = "txtAntiguedadBuscar";
+            this.txtAntiguedadBuscar.Size = new System.Drawing.Size(199, 21);
+            this.txtAntiguedadBuscar.TabIndex = 24;
             // 
-            // txtPromedioBuscar
+            // txtPuestoBuscar
             // 
-            this.txtPromedioBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPromedioBuscar.Location = new System.Drawing.Point(248, 37);
-            this.txtPromedioBuscar.Name = "txtPromedioBuscar";
-            this.txtPromedioBuscar.Size = new System.Drawing.Size(199, 21);
-            this.txtPromedioBuscar.TabIndex = 25;
+            this.txtPuestoBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPuestoBuscar.Location = new System.Drawing.Point(248, 37);
+            this.txtPuestoBuscar.Name = "txtPuestoBuscar";
+            this.txtPuestoBuscar.Size = new System.Drawing.Size(199, 21);
+            this.txtPuestoBuscar.TabIndex = 25;
             // 
             // groupBoxCRUD
             // 
-            this.groupBoxCRUD.Controls.Add(this.label1);
-            this.groupBoxCRUD.Controls.Add(this.textBox1);
+            this.groupBoxCRUD.Controls.Add(this.salarioLabel);
+            this.groupBoxCRUD.Controls.Add(this.txtSalario);
             this.groupBoxCRUD.Controls.Add(this.txtNombre);
             this.groupBoxCRUD.Controls.Add(this.guardarBtn);
             this.groupBoxCRUD.Controls.Add(this.nombreLabel);
@@ -200,14 +221,33 @@
             this.groupBoxCRUD.Controls.Add(this.txtEdad);
             this.groupBoxCRUD.Controls.Add(this.editarBtn);
             this.groupBoxCRUD.Controls.Add(this.puestoLabel);
-            this.groupBoxCRUD.Controls.Add(this.txtCarrera);
+            this.groupBoxCRUD.Controls.Add(this.txtAntiguedad);
             this.groupBoxCRUD.Controls.Add(this.añadirBtn);
-            this.groupBoxCRUD.Controls.Add(this.txtPromedio);
+            this.groupBoxCRUD.Controls.Add(this.txtPuesto);
             this.groupBoxCRUD.Location = new System.Drawing.Point(43, 13);
             this.groupBoxCRUD.Name = "groupBoxCRUD";
             this.groupBoxCRUD.Size = new System.Drawing.Size(458, 178);
             this.groupBoxCRUD.TabIndex = 40;
             this.groupBoxCRUD.TabStop = false;
+            // 
+            // salarioLabel
+            // 
+            this.salarioLabel.AutoSize = true;
+            this.salarioLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salarioLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.salarioLabel.Location = new System.Drawing.Point(23, 111);
+            this.salarioLabel.Name = "salarioLabel";
+            this.salarioLabel.Size = new System.Drawing.Size(57, 15);
+            this.salarioLabel.TabIndex = 35;
+            this.salarioLabel.Text = "Salario:";
+            // 
+            // txtSalario
+            // 
+            this.txtSalario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSalario.Location = new System.Drawing.Point(86, 108);
+            this.txtSalario.Name = "txtSalario";
+            this.txtSalario.Size = new System.Drawing.Size(200, 21);
+            this.txtSalario.TabIndex = 36;
             // 
             // txtNombre
             // 
@@ -228,6 +268,7 @@
             this.guardarBtn.TabIndex = 34;
             this.guardarBtn.Text = "GUARDAR";
             this.guardarBtn.UseVisualStyleBackColor = false;
+            this.guardarBtn.Click += new System.EventHandler(this.guardarBtn_Click);
             // 
             // nombreLabel
             // 
@@ -251,6 +292,7 @@
             this.limpiarBtn.TabIndex = 33;
             this.limpiarBtn.Text = "LIMPIAR";
             this.limpiarBtn.UseVisualStyleBackColor = false;
+            this.limpiarBtn.Click += new System.EventHandler(this.limpiarBtn_Click);
             // 
             // edadLabel
             // 
@@ -285,6 +327,7 @@
             this.eliminarBtn.TabIndex = 30;
             this.eliminarBtn.Text = "BORRAR";
             this.eliminarBtn.UseVisualStyleBackColor = false;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
             // txtEdad
             // 
@@ -304,6 +347,7 @@
             this.editarBtn.TabIndex = 29;
             this.editarBtn.Text = "EDITAR";
             this.editarBtn.UseVisualStyleBackColor = false;
+            this.editarBtn.Click += new System.EventHandler(this.editarBtn_Click);
             // 
             // puestoLabel
             // 
@@ -316,13 +360,13 @@
             this.puestoLabel.TabIndex = 23;
             this.puestoLabel.Text = "Puesto:";
             // 
-            // txtCarrera
+            // txtAntiguedad
             // 
-            this.txtCarrera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCarrera.Location = new System.Drawing.Point(248, 77);
-            this.txtCarrera.Name = "txtCarrera";
-            this.txtCarrera.Size = new System.Drawing.Size(199, 21);
-            this.txtCarrera.TabIndex = 24;
+            this.txtAntiguedad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAntiguedad.Location = new System.Drawing.Point(248, 77);
+            this.txtAntiguedad.Name = "txtAntiguedad";
+            this.txtAntiguedad.Size = new System.Drawing.Size(199, 21);
+            this.txtAntiguedad.TabIndex = 24;
             // 
             // añadirBtn
             // 
@@ -336,14 +380,15 @@
             this.añadirBtn.TabIndex = 27;
             this.añadirBtn.Text = "AÑADIR";
             this.añadirBtn.UseVisualStyleBackColor = false;
+            this.añadirBtn.Click += new System.EventHandler(this.añadirBtn_Click);
             // 
-            // txtPromedio
+            // txtPuesto
             // 
-            this.txtPromedio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPromedio.Location = new System.Drawing.Point(248, 37);
-            this.txtPromedio.Name = "txtPromedio";
-            this.txtPromedio.Size = new System.Drawing.Size(199, 21);
-            this.txtPromedio.TabIndex = 25;
+            this.txtPuesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPuesto.Location = new System.Drawing.Point(248, 37);
+            this.txtPuesto.Name = "txtPuesto";
+            this.txtPuesto.Size = new System.Drawing.Size(199, 21);
+            this.txtPuesto.TabIndex = 25;
             // 
             // retrocederBtn
             // 
@@ -356,6 +401,7 @@
             this.retrocederBtn.TabIndex = 39;
             this.retrocederBtn.Text = "←";
             this.retrocederBtn.UseVisualStyleBackColor = false;
+            this.retrocederBtn.Click += new System.EventHandler(this.retrocederBtn_Click);
             // 
             // errorLabel
             // 
@@ -367,52 +413,15 @@
             this.errorLabel.Size = new System.Drawing.Size(0, 16);
             this.errorLabel.TabIndex = 38;
             // 
-            // exAlumnoDGV
+            // docenteDGV
             // 
-            this.exAlumnoDGV.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.exAlumnoDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.exAlumnoDGV.Location = new System.Drawing.Point(32, 222);
-            this.exAlumnoDGV.Name = "exAlumnoDGV";
-            this.exAlumnoDGV.Size = new System.Drawing.Size(952, 300);
-            this.exAlumnoDGV.TabIndex = 37;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(23, 111);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 15);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Salario:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(86, 108);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 21);
-            this.textBox1.TabIndex = 36;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(25, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 15);
-            this.label2.TabIndex = 38;
-            this.label2.Text = "Salario:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(88, 108);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 21);
-            this.textBox2.TabIndex = 39;
+            this.docenteDGV.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.docenteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.docenteDGV.Location = new System.Drawing.Point(32, 222);
+            this.docenteDGV.Name = "docenteDGV";
+            this.docenteDGV.Size = new System.Drawing.Size(952, 300);
+            this.docenteDGV.TabIndex = 37;
+            this.docenteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.docenteDGV_CellClick);
             // 
             // DocenteForm
             // 
@@ -424,18 +433,19 @@
             this.Controls.Add(this.groupBoxCRUD);
             this.Controls.Add(this.retrocederBtn);
             this.Controls.Add(this.errorLabel);
-            this.Controls.Add(this.exAlumnoDGV);
+            this.Controls.Add(this.docenteDGV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DocenteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DocenteForm";
+            this.Load += new System.EventHandler(this.DocenteForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();
             this.groupBoxCRUD.ResumeLayout(false);
             this.groupBoxCRUD.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exAlumnoDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docenteDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -448,12 +458,12 @@
         private System.Windows.Forms.TextBox txtNombreBuscar;
         private System.Windows.Forms.Label nombreBLabel;
         private System.Windows.Forms.Label edadBLabel;
-        private System.Windows.Forms.Label carreraBLabel;
+        private System.Windows.Forms.Label antiguedadBLabel;
         private System.Windows.Forms.Button buscarBtn;
         private System.Windows.Forms.TextBox txtEdadBuscar;
-        private System.Windows.Forms.Label promedioBLabel;
-        private System.Windows.Forms.TextBox txtCarreraBuscar;
-        private System.Windows.Forms.TextBox txtPromedioBuscar;
+        private System.Windows.Forms.Label puestoBLabel;
+        private System.Windows.Forms.TextBox txtAntiguedadBuscar;
+        private System.Windows.Forms.TextBox txtPuestoBuscar;
         private System.Windows.Forms.GroupBox groupBoxCRUD;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button guardarBtn;
@@ -465,15 +475,15 @@
         private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.Button editarBtn;
         private System.Windows.Forms.Label puestoLabel;
-        private System.Windows.Forms.TextBox txtCarrera;
+        private System.Windows.Forms.TextBox txtAntiguedad;
         private System.Windows.Forms.Button añadirBtn;
-        private System.Windows.Forms.TextBox txtPromedio;
+        private System.Windows.Forms.TextBox txtPuesto;
         private System.Windows.Forms.Button retrocederBtn;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.DataGridView exAlumnoDGV;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridView docenteDGV;
+        private System.Windows.Forms.Label salarioLabel;
+        private System.Windows.Forms.TextBox txtSalario;
+        private System.Windows.Forms.Label salarioBLabel;
+        private System.Windows.Forms.TextBox txtSalarioBuscar;
     }
 }
