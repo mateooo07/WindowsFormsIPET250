@@ -15,10 +15,8 @@ namespace WindowsFormEscuela.Conexiones
         {
             List<Cursando> listaAlumnos = new List<Cursando>();
 
-            conexion.ConnectionString = "data source=localhost; initial catalog=Empleados_DB; integrated security=sspi";
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = "SELECT * FROM Alumno"; // cambio aquí
-            comando.Connection = conexion;
+            comando.Parameters.Clear();
+            comando.CommandText = "SELECT * FROM Alumno";
             AbrirConexion();
 
             SqlDataReader lector = comando.ExecuteReader();

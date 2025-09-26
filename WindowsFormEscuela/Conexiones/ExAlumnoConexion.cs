@@ -15,19 +15,17 @@ namespace WindowsFormEscuela.Conexiones
         {
             List<ExAlumno> listaExAlumno = new List<ExAlumno>();
 
-            conexion.ConnectionString = "data source=localhost; initial catalog=Empleados_DB; integrated security=sspi";
-            comando.CommandType = System.Data.CommandType.Text;
+            comando.Parameters.Clear();
             comando.CommandText = "SELECT * FROM ExAlumno";
-            comando.Connection = conexion;
-            AbrirConexion();
 
+            AbrirConexion();
             SqlDataReader lector = comando.ExecuteReader();
 
             while (lector.Read())
             {
                 ExAlumno exalumno = new ExAlumno
                 {
-                    Id = lector.GetInt32(0),          // 🔹 agregado
+                    Id = lector.GetInt32(0),
                     Nombre = lector.GetString(1),
                     Edad = lector.GetInt32(2),
                     Carrera = lector.GetString(3),
@@ -37,6 +35,7 @@ namespace WindowsFormEscuela.Conexiones
                 listaExAlumno.Add(exalumno);
             }
 
+            lector.Close();
             CerrarConexion();
             return listaExAlumno;
         }
@@ -44,11 +43,7 @@ namespace WindowsFormEscuela.Conexiones
         public void AgregarExAlumno(ExAlumno exalumno)
         {
             comando.Parameters.Clear();
-            conexion.ConnectionString = "data source=localhost; initial catalog=Empleados_DB; integrated security=sspi";
-            comando.CommandType = System.Data.CommandType.Text;
-
-            comando.CommandText = "insert into ExAlumno values (@nombre, @edad, @carrera, @estado, @promedio)";
-
+            comando.CommandText = "INSERT INTO ExAlumno (Nombre, Edad, Carrera, Estado, Promedio) VALUES (@nombre, @edad, @carrera, @estado, @promedio)";
             comando.Parameters.AddWithValue("@nombre", exalumno.Nombre);
             comando.Parameters.AddWithValue("@edad", exalumno.Edad);
             comando.Parameters.AddWithValue("@carrera", exalumno.Carrera);
@@ -58,42 +53,42 @@ namespace WindowsFormEscuela.Conexiones
             AbrirConexion();
             comando.ExecuteNonQuery();
             CerrarConexion();
-
         }
 
         public bool EliminarExAlumno(int id)
         {
-            bool eliminado = false;
-            SqlConnection conexion = new SqlConnection("data source=localhost; initial catalog=Empleados_DB; integrated security=sspi");
-            SqlCommand comando = new SqlCommand();
-
-            comando.Connection = conexion;
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = "DELETE FROM ExAlumno WHERE Id = @id";
+            comando.Parameters.Clear();
+            comando.CommandText = "DELETE FROM ExAlumno WHERE Id=@id";
             comando.Parameters.AddWithValue("@id", id);
 
             AbrirConexion();
             int filasAfectadas = comando.ExecuteNonQuery();
-
-            if (filasAfectadas > 0)
-                eliminado = true;
-
-            comando.Dispose();
             CerrarConexion();
 
-            return eliminado;
+            return filasAfectadas > 0;
         }
 
+        public void EditarExAlumno(ExAlumno exalumno)
+        {
+            comando.Parameters.Clear();
+            comando.CommandText = "UPDATE ExAlumno SET Nombre=@nombre, Edad=@edad, Carrera=@carrera, Estado=@estado, Promedio=@promedio WHERE Id=@id";
+
+            comando.Parameters.AddWithValue("@nombre", exalumno.Nombre);
+            comando.Parameters.AddWithValue("@edad", exalumno.Edad);
+            comando.Parameters.AddWithValue("@carrera", exalumno.Carrera);
+            comando.Parameters.AddWithValue("@estado", exalumno.Estado);
+            comando.Parameters.AddWithValue("@promedio", exalumno.Promedio);
+            comando.Parameters.AddWithValue("@id", exalumno.Id);
+
+            AbrirConexion();
+            comando.ExecuteNonQuery();
+            CerrarConexion();
+        }
 
         public List<ExAlumno> BuscarExAlumnos(string nombre, string carrera, string edad, string promedio, bool cursando)
         {
             List<ExAlumno> listaExAlumnos = new List<ExAlumno>();
-            SqlConnection conexion = new SqlConnection("data source=localhost; initial catalog=Empleados_DB; integrated security=sspi");
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader lector = null;
-
-            comando.Connection = conexion;
-            comando.CommandType = System.Data.CommandType.Text;
+            comando.Parameters.Clear();
 
             StringBuilder query = new StringBuilder("SELECT * FROM ExAlumno WHERE 1=1");
 
@@ -102,11 +97,11 @@ namespace WindowsFormEscuela.Conexiones
             if (!string.IsNullOrWhiteSpace(carrera))
                 query.Append(" AND Carrera LIKE @carrera");
             if (!string.IsNullOrWhiteSpace(edad))
-                query.Append(" AND Edad = @edad");
+                query.Append(" AND Edad=@edad");
             if (!string.IsNullOrWhiteSpace(promedio))
-                query.Append(" AND Promedio = @promedio");
+                query.Append(" AND Promedio=@promedio");
             if (cursando)
-                query.Append(" AND Estado = @estado");
+                query.Append(" AND Estado=@estado");
 
             comando.CommandText = query.ToString();
 
@@ -122,48 +117,27 @@ namespace WindowsFormEscuela.Conexiones
                 comando.Parameters.AddWithValue("@estado", cursando);
 
             AbrirConexion();
-            lector = comando.ExecuteReader();
+            SqlDataReader lector = comando.ExecuteReader();
 
             while (lector.Read())
             {
-                ExAlumno ex = new ExAlumno();
-                ex.Id = lector.GetInt32(0);
-                ex.Nombre = lector.GetString(1);
-                ex.Edad = lector.GetInt32(2);
-                ex.Carrera = lector.GetString(3);
-                ex.Estado = lector.GetBoolean(4);
-                ex.Promedio = lector.GetDouble(5);
-
+                ExAlumno ex = new ExAlumno
+                {
+                    Id = lector.GetInt32(0),
+                    Nombre = lector.GetString(1),
+                    Edad = lector.GetInt32(2),
+                    Carrera = lector.GetString(3),
+                    Estado = lector.GetBoolean(4),
+                    Promedio = lector.GetDouble(5)
+                };
                 listaExAlumnos.Add(ex);
             }
 
             lector.Close();
-            comando.Dispose();
             CerrarConexion();
 
             return listaExAlumnos;
         }
-
-
-
-        public void EditarExAlumno(ExAlumno exalumno)
-        {
-            comando.Parameters.Clear();
-            conexion.ConnectionString = "data source=localhost; initial catalog=Empleados_DB; integrated security=sspi";
-            comando.CommandType = System.Data.CommandType.Text;
-
-            comando.CommandText = "UPDATE ExAlumno SET Nombre=@nombre, Edad=@edad, Carrera=@carrera, Estado=@estado, Promedio=@promedio WHERE Id=@id";
-
-            comando.Parameters.AddWithValue("@nombre", exalumno.Nombre);
-            comando.Parameters.AddWithValue("@edad", exalumno.Edad);
-            comando.Parameters.AddWithValue("@carrera", exalumno.Carrera);
-            comando.Parameters.AddWithValue("@estado", exalumno.Estado);
-            comando.Parameters.AddWithValue("@promedio", exalumno.Promedio);
-            comando.Parameters.AddWithValue("@id", exalumno.Id);
-
-            AbrirConexion();
-            comando.ExecuteNonQuery();
-            CerrarConexion();
-        }
     }
+
 }
