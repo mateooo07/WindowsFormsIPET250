@@ -103,8 +103,12 @@ namespace WindowsFormEscuela
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo eliminar el docente.");
+                    MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un alumno para eliminar.");
             }
         }
 
