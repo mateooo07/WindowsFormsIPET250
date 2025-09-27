@@ -19,7 +19,7 @@ namespace WindowsFormEscuela
 
         private void estudianteBtn_Click(object sender, EventArgs e)
         {
-            EstudianteForm estudianteForm = new EstudianteForm();
+            AlumnoForm estudianteForm = new AlumnoForm();
             estudianteForm.Show();
             this.Close();
         }
