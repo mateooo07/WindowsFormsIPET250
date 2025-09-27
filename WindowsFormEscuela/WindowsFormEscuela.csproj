@@ -109,6 +109,9 @@
     <EmbeddedResource Include="Forms\Autenticación\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormsModelos\NoDocenteForm.resx">
+      <DependentUpon>NoDocenteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>

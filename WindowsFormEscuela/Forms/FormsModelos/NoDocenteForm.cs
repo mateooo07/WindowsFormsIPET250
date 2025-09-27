@@ -56,16 +56,16 @@ namespace WindowsFormEscuela
                 return;
             }
 
-            Docente d = new Docente(txtNombre.Text, edad, txtPuesto.Text, antiguedad, salario);
+            NoDocente noDocente = new NoDocente(txtNombre.Text, edad, txtPuesto.Text, antiguedad, salario);
 
             if (esEdicion)
             {
-                d.Id = idSeleccionado;
-                conexion.EditarNoDocente(d);
+                noDocente.Id = idSeleccionado;
+                conexion.EditarNoDocente(noDocente);
             }
             else
             {
-                conexion.AgregarNoDocente(d);
+                conexion.AgregarNoDocente(noDocente);
             }
 
             noDocentes = conexion.LeerNoDocentes();

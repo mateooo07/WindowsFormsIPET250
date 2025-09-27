@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoDocenteForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocenteForm));
             this.groupBoxBuscar = new System.Windows.Forms.GroupBox();
             this.salarioBLabel = new System.Windows.Forms.Label();
             this.txtSalarioBuscar = new System.Windows.Forms.TextBox();
@@ -83,7 +83,7 @@
             this.groupBoxBuscar.Location = new System.Drawing.Point(537, 13);
             this.groupBoxBuscar.Name = "groupBoxBuscar";
             this.groupBoxBuscar.Size = new System.Drawing.Size(458, 178);
-            this.groupBoxBuscar.TabIndex = 46;
+            this.groupBoxBuscar.TabIndex = 41;
             this.groupBoxBuscar.TabStop = false;
             // 
             // salarioBLabel
@@ -116,6 +116,7 @@
             this.habilitarButton.TabIndex = 37;
             this.habilitarButton.Text = "HABILITAR";
             this.habilitarButton.UseVisualStyleBackColor = false;
+            this.habilitarButton.Click += new System.EventHandler(this.habilitarButton_Click);
             // 
             // txtNombreBuscar
             // 
@@ -169,6 +170,7 @@
             this.buscarBtn.TabIndex = 28;
             this.buscarBtn.Text = "BUSCAR";
             this.buscarBtn.UseVisualStyleBackColor = false;
+            this.buscarBtn.Click += new System.EventHandler(this.buscarBtn_Click);
             // 
             // txtEdadBuscar
             // 
@@ -225,7 +227,7 @@
             this.groupBoxCRUD.Location = new System.Drawing.Point(43, 13);
             this.groupBoxCRUD.Name = "groupBoxCRUD";
             this.groupBoxCRUD.Size = new System.Drawing.Size(458, 178);
-            this.groupBoxCRUD.TabIndex = 45;
+            this.groupBoxCRUD.TabIndex = 40;
             this.groupBoxCRUD.TabStop = false;
             // 
             // salarioLabel
@@ -266,6 +268,7 @@
             this.guardarBtn.TabIndex = 34;
             this.guardarBtn.Text = "GUARDAR";
             this.guardarBtn.UseVisualStyleBackColor = false;
+            this.guardarBtn.Click += new System.EventHandler(this.guardarBtn_Click);
             // 
             // nombreLabel
             // 
@@ -289,6 +292,7 @@
             this.limpiarBtn.TabIndex = 33;
             this.limpiarBtn.Text = "LIMPIAR";
             this.limpiarBtn.UseVisualStyleBackColor = false;
+            this.limpiarBtn.Click += new System.EventHandler(this.limpiarBtn_Click);
             // 
             // edadLabel
             // 
@@ -323,6 +327,7 @@
             this.eliminarBtn.TabIndex = 30;
             this.eliminarBtn.Text = "BORRAR";
             this.eliminarBtn.UseVisualStyleBackColor = false;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
             // txtEdad
             // 
@@ -375,6 +380,7 @@
             this.añadirBtn.TabIndex = 27;
             this.añadirBtn.Text = "AÑADIR";
             this.añadirBtn.UseVisualStyleBackColor = false;
+            this.añadirBtn.Click += new System.EventHandler(this.añadirBtn_Click);
             // 
             // txtPuesto
             // 
@@ -392,9 +398,10 @@
             this.retrocederBtn.Location = new System.Drawing.Point(3, 5);
             this.retrocederBtn.Name = "retrocederBtn";
             this.retrocederBtn.Size = new System.Drawing.Size(34, 32);
-            this.retrocederBtn.TabIndex = 44;
+            this.retrocederBtn.TabIndex = 39;
             this.retrocederBtn.Text = "←";
             this.retrocederBtn.UseVisualStyleBackColor = false;
+            this.retrocederBtn.Click += new System.EventHandler(this.retrocederBtn_Click);
             // 
             // errorLabel
             // 
@@ -404,18 +411,19 @@
             this.errorLabel.Location = new System.Drawing.Point(40, 198);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(0, 16);
-            this.errorLabel.TabIndex = 43;
+            this.errorLabel.TabIndex = 38;
             // 
-            // noDocenteDGV
+            // docenteDGV
             // 
             this.noDocenteDGV.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.noDocenteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.noDocenteDGV.Location = new System.Drawing.Point(32, 222);
-            this.noDocenteDGV.Name = "noDocenteDGV";
+            this.noDocenteDGV.Name = "docenteDGV";
             this.noDocenteDGV.Size = new System.Drawing.Size(952, 300);
-            this.noDocenteDGV.TabIndex = 42;
+            this.noDocenteDGV.TabIndex = 37;
+            this.noDocenteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.docenteDGV_CellClick);
             // 
-            // NoDocenteForm
+            // DocenteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -427,8 +435,12 @@
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.noDocenteDGV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "NoDocenteForm";
-            this.Text = "NoDocenteForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "DocenteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DocenteForm";
+            this.Load += new System.EventHandler(this.DocenteForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();
             this.groupBoxCRUD.ResumeLayout(false);
