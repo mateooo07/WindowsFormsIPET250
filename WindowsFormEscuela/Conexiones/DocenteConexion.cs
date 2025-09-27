@@ -86,7 +86,7 @@ namespace WindowsFormEscuela.Conexiones
             CerrarConexion();
         }
 
-        public List<Docente> BuscarDocentes(string nombre, string puesto, string edad, string salario)
+        public List<Docente> BuscarDocentes(string nombre, string puesto, string edad, string salario, string antiguedad)
         {
             List<Docente> listaDocentes = new List<Docente>();
             comando.Parameters.Clear();
@@ -101,6 +101,8 @@ namespace WindowsFormEscuela.Conexiones
                 query.Append(" AND Edad=@edad");
             if (!string.IsNullOrWhiteSpace(salario))
                 query.Append(" AND Salario=@salario");
+            if (!string.IsNullOrWhiteSpace(antiguedad))
+                query.Append(" AND Antiguedad=@antiguedad");
 
             comando.CommandText = query.ToString();
 
@@ -112,6 +114,8 @@ namespace WindowsFormEscuela.Conexiones
                 comando.Parameters.AddWithValue("@edad", edadInt);
             if (!string.IsNullOrWhiteSpace(salario) && int.TryParse(salario, out int salarioInt))
                 comando.Parameters.AddWithValue("@salario", salarioInt);
+            if(!string.IsNullOrWhiteSpace(antiguedad) && int.TryParse(antiguedad, out int antiguedadInt))
+                comando.Parameters.AddWithValue("@antiguedad", antiguedadInt);
 
             AbrirConexion();
             SqlDataReader lector = comando.ExecuteReader();

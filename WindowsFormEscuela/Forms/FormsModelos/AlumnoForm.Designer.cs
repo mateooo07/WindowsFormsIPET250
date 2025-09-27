@@ -144,6 +144,7 @@
             this.habilitarButton.TabIndex = 37;
             this.habilitarButton.Text = "HABILITAR";
             this.habilitarButton.UseVisualStyleBackColor = false;
+            this.habilitarButton.Click += new System.EventHandler(this.habilitarButton_Click_1);
             // 
             // txtNombreBuscar
             // 
@@ -197,6 +198,7 @@
             this.buscarBtn.TabIndex = 28;
             this.buscarBtn.Text = "BUSCAR";
             this.buscarBtn.UseVisualStyleBackColor = false;
+            this.buscarBtn.Click += new System.EventHandler(this.buscarBtn_Click);
             // 
             // chkCursandoBuscar
             // 
@@ -328,6 +330,7 @@
             this.guardarBtn.TabIndex = 34;
             this.guardarBtn.Text = "GUARDAR";
             this.guardarBtn.UseVisualStyleBackColor = false;
+            this.guardarBtn.Click += new System.EventHandler(this.guardarBtn_Click);
             // 
             // nombreLabel
             // 
@@ -351,6 +354,7 @@
             this.limpiarBtn.TabIndex = 33;
             this.limpiarBtn.Text = "LIMPIAR";
             this.limpiarBtn.UseVisualStyleBackColor = false;
+            this.limpiarBtn.Click += new System.EventHandler(this.limpiarBtn_Click);
             // 
             // edadLabel
             // 
@@ -397,6 +401,7 @@
             this.eliminarBtn.TabIndex = 30;
             this.eliminarBtn.Text = "BORRAR";
             this.eliminarBtn.UseVisualStyleBackColor = false;
+            this.eliminarBtn.Click += new System.EventHandler(this.eliminarBtn_Click);
             // 
             // txtEdad
             // 
@@ -416,6 +421,7 @@
             this.editarBtn.TabIndex = 29;
             this.editarBtn.Text = "EDITAR";
             this.editarBtn.UseVisualStyleBackColor = false;
+            this.editarBtn.Click += new System.EventHandler(this.editarBtn_Click);
             // 
             // añoLabel
             // 
@@ -448,6 +454,7 @@
             this.añadirBtn.TabIndex = 27;
             this.añadirBtn.Text = "AÑADIR";
             this.añadirBtn.UseVisualStyleBackColor = false;
+            this.añadirBtn.Click += new System.EventHandler(this.añadirBtn_Click);
             // 
             // txtAño
             // 
@@ -468,6 +475,7 @@
             this.retrocederBtn.TabIndex = 39;
             this.retrocederBtn.Text = "←";
             this.retrocederBtn.UseVisualStyleBackColor = false;
+            this.retrocederBtn.Click += new System.EventHandler(this.retrocederBtn_Click);
             // 
             // errorLabel
             // 
@@ -487,6 +495,7 @@
             this.alumnoDGV.Name = "alumnoDGV";
             this.alumnoDGV.Size = new System.Drawing.Size(952, 300);
             this.alumnoDGV.TabIndex = 37;
+            this.alumnoDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alumnoDGV_CellClick);
             // 
             // AlumnoForm
             // 
@@ -500,8 +509,12 @@
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.alumnoDGV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AlumnoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AlumnoForm";
+            this.Load += new System.EventHandler(this.alumnoForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();
             this.groupBoxCRUD.ResumeLayout(false);

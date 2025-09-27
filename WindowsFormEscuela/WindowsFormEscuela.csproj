@@ -50,11 +50,11 @@
     <Compile Include="Conexiones\DocenteConexion.cs" />
     <Compile Include="Conexiones\ExAlumnoConexion.cs" />
     <Compile Include="Conexiones\NoDocenteConexion.cs" />
-    <Compile Include="Forms\FormsModelos\EstudianteForm.cs">
+    <Compile Include="Forms\FormsModelos\AlumnoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormsModelos\EstudianteForm.Designer.cs">
-      <DependentUpon>EstudianteForm.cs</DependentUpon>
+    <Compile Include="Forms\FormsModelos\AlumnoForm.Designer.cs">
+      <DependentUpon>AlumnoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexiones\Conexion.cs" />
     <Compile Include="Modelos\Cursando.cs" />
@@ -100,8 +100,8 @@
     <EmbeddedResource Include="Forms\FormsModelos\DocenteForm.resx">
       <DependentUpon>DocenteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormsModelos\EstudianteForm.resx">
-      <DependentUpon>EstudianteForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormsModelos\AlumnoForm.resx">
+      <DependentUpon>AlumnoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormsModelos\ExAlumnoForm.resx">
       <DependentUpon>ExAlumnoForm.cs</DependentUpon>

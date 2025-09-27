@@ -130,8 +130,9 @@ namespace WindowsFormEscuela
             string puesto = txtPuestoBuscar.Text.Trim();
             string edad = txtEdadBuscar.Text.Trim();
             string salario = txtSalarioBuscar.Text.Trim();
+            string antiguedad = txtAntiguedadBuscar.Text.Trim();
 
-            docentes = conexion.BuscarDocentes(nombre, puesto, edad, salario);
+            docentes = conexion.BuscarDocentes(nombre, puesto, edad, salario, antiguedad);
             docenteDGV.DataSource = docentes;
         }
 

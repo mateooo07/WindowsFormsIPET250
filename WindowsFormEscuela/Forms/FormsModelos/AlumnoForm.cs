@@ -119,7 +119,7 @@ namespace WindowsFormEscuela
                 txtNombre.Text = alumnoDGV.CurrentRow.Cells["Nombre"].Value.ToString();
                 txtCarrera.Text = alumnoDGV.CurrentRow.Cells["Carrera"].Value.ToString();
                 txtEdad.Text = alumnoDGV.CurrentRow.Cells["Edad"].Value.ToString();
-                txtAño.Text = alumnoDGV.CurrentRow.Cells["Año"].Value.ToString();
+                txtAño.Text = alumnoDGV.CurrentRow.Cells["Anio"].Value.ToString();
                 txtMateria.Text = alumnoDGV.CurrentRow.Cells["Materia"].Value.ToString();
                 txtNota.Text = alumnoDGV.CurrentRow.Cells["Nota"].Value.ToString();
                 chkCursando.Checked = Convert.ToBoolean(alumnoDGV.CurrentRow.Cells["Estado"].Value);
@@ -135,7 +135,7 @@ namespace WindowsFormEscuela
             string nota = txtNotaBuscar.Text.Trim();
             bool cursando = chkCursandoBuscar.Checked ? true : false;
 
-            alumnos = conexion.BuscarAlumnos(nombre, carrera, edad, cursando, anio, materia, nota);
+            alumnos = conexion.BuscarAlumnos(nombre, carrera, edad, anio, materia, nota, cursando);
             alumnoDGV.DataSource = alumnos;
         }
 
@@ -196,7 +196,9 @@ namespace WindowsFormEscuela
             txtCarrera.Text = null;
             txtNombre.Text = null;
             txtEdad.Text = null;
-            txtPromedio.Text = null;
+            txtAño.Text = null;
+            txtMateria.Text = null;
+            txtNota.Text = null;
             chkCursando.Checked = false;
         }
 
@@ -207,17 +209,17 @@ namespace WindowsFormEscuela
 
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
-            if (exAlumnoDGV.SelectedRows.Count > 0)
+            if (alumnoDGV.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(exAlumnoDGV.SelectedRows[0].Cells["Id"].Value);
+                int id = Convert.ToInt32(alumnoDGV.SelectedRows[0].Cells["Id"].Value);
 
-                bool eliminado = conexion.EliminarExAlumno(id);
+                bool eliminado = conexion.EliminarAlumno(id);
 
                 if (eliminado)
                 {
                     MessageBox.Show("Alumno eliminado correctamente.");
-                    exAlumnos = conexion.LeerExAlumnos();
-                    exAlumnoDGV.DataSource = exAlumnos;
+                    alumnos = conexion.LeerAlumnos();
+                    alumnoDGV.DataSource = alumnos;
                 }
                 else
                 {
