@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormEscuela.Conexiones;
 
 namespace WindowsFormEscuela
 {
     public partial class Login : Form
     {
+        UsuarioConexion usuarioConexion = new UsuarioConexion();
         public Login()
         {
             InitializeComponent();
@@ -27,9 +29,13 @@ namespace WindowsFormEscuela
             string usuario = usuarioTxt.Text;
             string contraseña = contraseñaTxt.Text;
 
-            if (usuario != "mateooo07" || contraseña != "talleres2025")
+            bool loginValido = usuarioConexion.VerificarCredenciales(usuario, contraseña);
+
+            if (!loginValido)
             {
                 errorLabel.Show();
+                usuarioTxt.Text = null;
+                contraseñaTxt.Text = null;
                 return;
             }
 

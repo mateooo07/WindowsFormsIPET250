@@ -46,10 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conexiones\AlumnoConexion.cs" />
-    <Compile Include="Conexiones\DocenteConexion.cs" />
-    <Compile Include="Conexiones\ExAlumnoConexion.cs" />
-    <Compile Include="Conexiones\NoDocenteConexion.cs" />
+    <Compile Include="Conexiones\ConexionesForm\AlumnoConexion.cs" />
+    <Compile Include="Conexiones\ConexionesForm\DocenteConexion.cs" />
+    <Compile Include="Conexiones\ConexionesForm\ExAlumnoConexion.cs" />
+    <Compile Include="Conexiones\ConexionesForm\NoDocenteConexion.cs" />
+    <Compile Include="Conexiones\Autenticación\UsuarioConexion.cs" />
     <Compile Include="Forms\FormsModelos\AlumnoForm.cs">
       <SubType>Form</SubType>
     </Compile>
