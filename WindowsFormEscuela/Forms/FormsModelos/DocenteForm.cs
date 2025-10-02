@@ -56,23 +56,30 @@ namespace WindowsFormEscuela
                 return;
             }
 
-            Docente d = new Docente(txtNombre.Text, edad, txtPuesto.Text, antiguedad, salario);
-
-            if (esEdicion)
+            try
             {
-                d.Id = idSeleccionado;
-                conexion.EditarDocente(d);
+                Docente d = new Docente(txtNombre.Text, edad, txtPuesto.Text, antiguedad, salario);
+
+                if (esEdicion)
+                {
+                    d.Id = idSeleccionado;
+                    conexion.EditarDocente(d);
+                }
+                else
+                {
+                    conexion.AgregarDocente(d);
+                }
+
+                docentes = conexion.LeerDocentes();
+                docenteDGV.DataSource = docentes;
+
+                desactivarTxts();
+                limpiarTxts();
             }
-            else
+            catch (Exception ex)
             {
-                conexion.AgregarDocente(d);
+                MessageBox.Show("Error al guardar el docente: " + ex.Message);
             }
-
-            docentes = conexion.LeerDocentes();
-            docenteDGV.DataSource = docentes;
-
-            desactivarTxts();
-            limpiarTxts();
         }
 
         private void editarBtn_Click(object sender, EventArgs e)
@@ -92,48 +99,70 @@ namespace WindowsFormEscuela
         {
             if (docenteDGV.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(docenteDGV.SelectedRows[0].Cells["Id"].Value);
-                bool eliminado = conexion.EliminarDocente(id);
+                try
+                {
+                    int id = Convert.ToInt32(docenteDGV.SelectedRows[0].Cells["Id"].Value);
+                    bool eliminado = conexion.EliminarDocente(id);
 
-                if (eliminado)
-                {
-                    MessageBox.Show("Docente eliminado correctamente.");
-                    docentes = conexion.LeerDocentes();
-                    docenteDGV.DataSource = docentes;
+                    if (eliminado)
+                    {
+                        MessageBox.Show("Docente eliminado correctamente.");
+                        docentes = conexion.LeerDocentes();
+                        docenteDGV.DataSource = docentes;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el docente. Verifica el Id.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    MessageBox.Show("Error al eliminar el docente: " + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Selecciona un alumno para eliminar.");
+                MessageBox.Show("Selecciona un docente para eliminar.");
             }
         }
 
         private void docenteDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                txtNombre.Text = docenteDGV.CurrentRow.Cells["Nombre"].Value.ToString();
-                txtEdad.Text = docenteDGV.CurrentRow.Cells["Edad"].Value.ToString();
-                txtPuesto.Text = docenteDGV.CurrentRow.Cells["Puesto"].Value.ToString();
-                txtAntiguedad.Text = docenteDGV.CurrentRow.Cells["Antiguedad"].Value.ToString();
-                txtSalario.Text = docenteDGV.CurrentRow.Cells["Salario"].Value.ToString();
+                if (e.RowIndex >= 0 && docenteDGV.CurrentRow != null)
+                {
+                    txtNombre.Text = docenteDGV.CurrentRow.Cells["Nombre"].Value?.ToString() ?? "";
+                    txtEdad.Text = docenteDGV.CurrentRow.Cells["Edad"].Value?.ToString() ?? "";
+                    txtPuesto.Text = docenteDGV.CurrentRow.Cells["Puesto"].Value?.ToString() ?? "";
+                    txtAntiguedad.Text = docenteDGV.CurrentRow.Cells["Antiguedad"].Value?.ToString() ?? "";
+                    txtSalario.Text = docenteDGV.CurrentRow.Cells["Salario"].Value?.ToString() ?? "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al seleccionar el docente: " + ex.Message);
             }
         }
 
+
         private void buscarBtn_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreBuscar.Text.Trim();
-            string puesto = txtPuestoBuscar.Text.Trim();
-            string edad = txtEdadBuscar.Text.Trim();
-            string salario = txtSalarioBuscar.Text.Trim();
-            string antiguedad = txtAntiguedadBuscar.Text.Trim();
+            try
+            {
+                string nombre = txtNombreBuscar.Text.Trim();
+                string puesto = txtPuestoBuscar.Text.Trim();
+                string edad = txtEdadBuscar.Text.Trim();
+                string salario = txtSalarioBuscar.Text.Trim();
+                string antiguedad = txtAntiguedadBuscar.Text.Trim();
 
-            docentes = conexion.BuscarDocentes(nombre, puesto, edad, salario, antiguedad);
-            docenteDGV.DataSource = docentes;
+                docentes = conexion.BuscarDocentes(nombre, puesto, edad, salario, antiguedad);
+                docenteDGV.DataSource = docentes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar docentes: " + ex.Message);
+            }
         }
 
         private void limpiarBtn_Click(object sender, EventArgs e)
@@ -203,9 +232,16 @@ namespace WindowsFormEscuela
 
         private void DocenteForm_Load(object sender, EventArgs e)
         {
-            docenteDGV.DataSource = docentes;
-            desactivarTxts();
-            desactivarBuscar();
+            try
+            {
+                docenteDGV.DataSource = docentes;
+                desactivarTxts();
+                desactivarBuscar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar el formulario de docentes: " + ex.Message);
+            }
         }
     }
 

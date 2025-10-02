@@ -144,7 +144,7 @@ internal class AlumnoConexion : Conexion
             if (!string.IsNullOrWhiteSpace(edad))
                 query.Append(" AND Edad=@edad");
             if (!string.IsNullOrWhiteSpace(año))
-                query.Append(" AND Año LIKE @año");
+                query.Append(" AND Anio LIKE @año");
             if (!string.IsNullOrWhiteSpace(materia))
                 query.Append(" AND Materia LIKE @materia");
             if (!string.IsNullOrWhiteSpace(nota))
