@@ -439,7 +439,7 @@
             this.MinimizeBox = false;
             this.Name = "DocenteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DocenteForm";
+            this.Text = "Docente";
             this.Load += new System.EventHandler(this.DocenteForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();

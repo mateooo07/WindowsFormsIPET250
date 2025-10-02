@@ -3,27 +3,22 @@ using Ejercicio5_objetos;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace WindowsFormEscuela.Conexiones
+internal class NoDocenteConexion : Conexion
 {
-    internal class NoDocenteConexion : Conexion
+    public List<NoDocente> LeerNoDocentes()
     {
-        public List<NoDocente> LeerNoDocentes()
+        List<NoDocente> lista = new List<NoDocente>();
+        try
         {
-            List<NoDocente> listaNoDocente = new List<NoDocente>();
-
             comando.Parameters.Clear();
             comando.CommandText = "SELECT * FROM NoDocente";
             AbrirConexion();
-
             SqlDataReader lector = comando.ExecuteReader();
-
             while (lector.Read())
             {
-                NoDocente nd = new NoDocente
+                lista.Add(new NoDocente
                 {
                     Id = lector.GetInt32(0),
                     Nombre = lector.GetString(1),
@@ -31,65 +26,99 @@ namespace WindowsFormEscuela.Conexiones
                     Puesto = lector.GetString(3),
                     Antiguedad = lector.GetInt32(4),
                     Salario = lector.GetInt32(5)
-                };
-                listaNoDocente.Add(nd);
+                });
             }
-
-            CerrarConexion();
-            return listaNoDocente;
+            lector.Close();
         }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al leer no-docentes: " + ex.Message, ex);
+        }
+        finally
+        {
+            CerrarConexion();
+        }
+        return lista;
+    }
 
-        public void AgregarNoDocente(NoDocente noDocente)
+    public void AgregarNoDocente(NoDocente nd)
+    {
+        try
         {
             comando.Parameters.Clear();
-            comando.CommandText = "INSERT INTO NoDocente (Nombre, Edad, Puesto, Antiguedad, Salario) " +
-                                  "VALUES (@nombre, @edad, @puesto, @antiguedad, @salario)";
-            comando.Parameters.AddWithValue("@nombre", noDocente.Nombre);
-            comando.Parameters.AddWithValue("@edad", noDocente.Edad);
-            comando.Parameters.AddWithValue("@puesto", noDocente.Puesto);
-            comando.Parameters.AddWithValue("@antiguedad", noDocente.Antiguedad);
-            comando.Parameters.AddWithValue("@salario", noDocente.Salario);
+            comando.CommandText = "INSERT INTO NoDocente (Nombre, Edad, Puesto, Antiguedad, Salario) VALUES (@nombre,@edad,@puesto,@antiguedad,@salario)";
+            comando.Parameters.AddWithValue("@nombre", nd.Nombre);
+            comando.Parameters.AddWithValue("@edad", nd.Edad);
+            comando.Parameters.AddWithValue("@puesto", nd.Puesto);
+            comando.Parameters.AddWithValue("@antiguedad", nd.Antiguedad);
+            comando.Parameters.AddWithValue("@salario", nd.Salario);
 
             AbrirConexion();
             comando.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al agregar no-docente: " + ex.Message, ex);
+        }
+        finally
+        {
             CerrarConexion();
         }
+    }
 
-        public bool EliminarNoDocente(int id)
+    public void EditarNoDocente(NoDocente nd)
+    {
+        try
+        {
+            comando.Parameters.Clear();
+            comando.CommandText = "UPDATE NoDocente SET Nombre=@nombre, Edad=@edad, Puesto=@puesto, Antiguedad=@antiguedad, Salario=@salario WHERE Id=@id";
+            comando.Parameters.AddWithValue("@nombre", nd.Nombre);
+            comando.Parameters.AddWithValue("@edad", nd.Edad);
+            comando.Parameters.AddWithValue("@puesto", nd.Puesto);
+            comando.Parameters.AddWithValue("@antiguedad", nd.Antiguedad);
+            comando.Parameters.AddWithValue("@salario", nd.Salario);
+            comando.Parameters.AddWithValue("@id", nd.Id);
+
+            AbrirConexion();
+            comando.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al editar no-docente: " + ex.Message, ex);
+        }
+        finally
+        {
+            CerrarConexion();
+        }
+    }
+
+    public bool EliminarNoDocente(int id)
+    {
+        try
         {
             comando.Parameters.Clear();
             comando.CommandText = "DELETE FROM NoDocente WHERE Id=@id";
             comando.Parameters.AddWithValue("@id", id);
 
             AbrirConexion();
-            int filasAfectadas = comando.ExecuteNonQuery();
-            CerrarConexion();
-
-            return filasAfectadas > 0;
+            return comando.ExecuteNonQuery() > 0;
         }
-
-        public void EditarNoDocente(NoDocente noDocente)
+        catch (Exception ex)
         {
-            comando.Parameters.Clear();
-            comando.CommandText = "UPDATE NoDocente SET Nombre=@nombre, Edad=@edad, Puesto=@puesto, Antiguedad=@antiguedad, Salario=@salario " +
-                                  "WHERE Id=@id";
-            comando.Parameters.AddWithValue("@nombre", noDocente.Nombre);
-            comando.Parameters.AddWithValue("@edad", noDocente.Edad);
-            comando.Parameters.AddWithValue("@puesto", noDocente.Puesto);
-            comando.Parameters.AddWithValue("@antiguedad", noDocente.Antiguedad);
-            comando.Parameters.AddWithValue("@salario", noDocente.Salario);
-            comando.Parameters.AddWithValue("@id", noDocente.Id);
-
-            AbrirConexion();
-            comando.ExecuteNonQuery();
+            throw new Exception("Error al eliminar no-docente: " + ex.Message, ex);
+        }
+        finally
+        {
             CerrarConexion();
         }
+    }
 
-        public List<NoDocente> BuscarNoDocentes(string nombre, string puesto, string edad, string salario, string antiguedad)
+    public List<NoDocente> BuscarNoDocentes(string nombre, string puesto, string edad, string salario, string antiguedad)
+    {
+        List<NoDocente> lista = new List<NoDocente>();
+        try
         {
-            List<NoDocente> listaDocentes = new List<NoDocente>();
             comando.Parameters.Clear();
-
             StringBuilder query = new StringBuilder("SELECT * FROM NoDocente WHERE 1=1");
 
             if (!string.IsNullOrWhiteSpace(nombre))
@@ -118,10 +147,9 @@ namespace WindowsFormEscuela.Conexiones
 
             AbrirConexion();
             SqlDataReader lector = comando.ExecuteReader();
-
             while (lector.Read())
             {
-                NoDocente noDocente = new NoDocente
+                lista.Add(new NoDocente
                 {
                     Id = lector.GetInt32(0),
                     Nombre = lector.GetString(1),
@@ -129,14 +157,18 @@ namespace WindowsFormEscuela.Conexiones
                     Puesto = lector.GetString(3),
                     Antiguedad = lector.GetInt32(4),
                     Salario = lector.GetInt32(5)
-                };
-                listaDocentes.Add(noDocente);
+                });
             }
-
             lector.Close();
-            CerrarConexion();
-
-            return listaDocentes;
         }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al buscar no-docentes: " + ex.Message, ex);
+        }
+        finally
+        {
+            CerrarConexion();
+        }
+        return lista;
     }
 }

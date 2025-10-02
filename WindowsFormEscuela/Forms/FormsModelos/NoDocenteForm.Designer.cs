@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocenteForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoDocenteForm));
             this.groupBoxBuscar = new System.Windows.Forms.GroupBox();
             this.salarioBLabel = new System.Windows.Forms.Label();
             this.txtSalarioBuscar = new System.Windows.Forms.TextBox();
@@ -413,17 +413,17 @@
             this.errorLabel.Size = new System.Drawing.Size(0, 16);
             this.errorLabel.TabIndex = 38;
             // 
-            // docenteDGV
+            // noDocenteDGV
             // 
             this.noDocenteDGV.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.noDocenteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.noDocenteDGV.Location = new System.Drawing.Point(32, 222);
-            this.noDocenteDGV.Name = "docenteDGV";
+            this.noDocenteDGV.Name = "noDocenteDGV";
             this.noDocenteDGV.Size = new System.Drawing.Size(952, 300);
             this.noDocenteDGV.TabIndex = 37;
-            this.noDocenteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.docenteDGV_CellClick);
+            this.noDocenteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.noDocenteDGV_CellClick);
             // 
-            // DocenteForm
+            // NoDocenteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -437,10 +437,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DocenteForm";
+            this.Name = "NoDocenteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DocenteForm";
-            this.Load += new System.EventHandler(this.DocenteForm_Load);
+            this.Text = "NoDocente";
+            this.Load += new System.EventHandler(this.NoDocenteForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();
             this.groupBoxCRUD.ResumeLayout(false);

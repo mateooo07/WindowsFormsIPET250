@@ -73,18 +73,25 @@ namespace WindowsFormEscuela
 
             ExAlumno ex = new ExAlumno(txtNombre.Text, edad, txtCarrera.Text, chkCursando.Checked, promedio);
 
-            if (esEdicion)
+            try
             {
-                ex.Id = idSeleccionado;
-                conexion.EditarExAlumno(ex);
-            }
-            else
-            {
-                conexion.AgregarExAlumno(ex);
-            }
+                if (esEdicion)
+                {
+                    ex.Id = idSeleccionado;
+                    conexion.EditarExAlumno(ex);
+                }
+                else
+                {
+                    conexion.AgregarExAlumno(ex);
+                }
 
-            exAlumnos = conexion.LeerExAlumnos();
-            exAlumnoDGV.DataSource = exAlumnos;
+                exAlumnos = conexion.LeerExAlumnos();
+                exAlumnoDGV.DataSource = exAlumnos;
+            }
+            catch (Exception exx)
+            {
+                MessageBox.Show("Error al guardar el alumno: " + exx.Message);
+            }
 
             desactivarTxts();
             limpiarTxts();
@@ -100,7 +107,15 @@ namespace WindowsFormEscuela
 
         private void ExAlumnoForm_Load(object sender, EventArgs e)
         {
-            exAlumnoDGV.DataSource= exAlumnos;
+            try
+            {
+                exAlumnoDGV.DataSource = exAlumnos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar alumnos: " + ex.Message);
+            }
+
             desactivarTxts();
             desactivarBuscar();
         }
@@ -109,23 +124,37 @@ namespace WindowsFormEscuela
         {
             if (e.RowIndex >= 0)
             {
-                txtNombre.Text = exAlumnoDGV.CurrentRow.Cells["Nombre"].Value.ToString();
-                txtCarrera.Text = exAlumnoDGV.CurrentRow.Cells["Carrera"].Value.ToString();
-                txtEdad.Text = exAlumnoDGV.CurrentRow.Cells["Edad"].Value.ToString();
-                txtPromedio.Text = exAlumnoDGV.CurrentRow.Cells["Promedio"].Value.ToString();
-                chkCursando.Checked = Convert.ToBoolean(exAlumnoDGV.CurrentRow.Cells["Estado"].Value);
+                try
+                {
+                    txtNombre.Text = exAlumnoDGV.CurrentRow.Cells["Nombre"].Value.ToString();
+                    txtCarrera.Text = exAlumnoDGV.CurrentRow.Cells["Carrera"].Value.ToString();
+                    txtEdad.Text = exAlumnoDGV.CurrentRow.Cells["Edad"].Value.ToString();
+                    txtPromedio.Text = exAlumnoDGV.CurrentRow.Cells["Promedio"].Value.ToString();
+                    chkCursando.Checked = Convert.ToBoolean(exAlumnoDGV.CurrentRow.Cells["Estado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al seleccionar alumno: " + ex.Message);
+                }
             }
         }
         private void buscarBtn_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreBuscar.Text.Trim();
-            string carrera = txtCarreraBuscar.Text.Trim();
-            string edad = txtEdadBuscar.Text.Trim();
-            string promedio = txtPromedioBuscar.Text.Trim();
-            bool cursando = chkCursandoBuscar.Checked ? true : false;
+            try
+            {
+                string nombre = txtNombreBuscar.Text.Trim();
+                string carrera = txtCarreraBuscar.Text.Trim();
+                string edad = txtEdadBuscar.Text.Trim();
+                string promedio = txtPromedioBuscar.Text.Trim();
+                bool cursando = chkCursandoBuscar.Checked;
 
-            exAlumnos = conexion.BuscarExAlumnos(nombre, carrera, edad, promedio, cursando);
-            exAlumnoDGV.DataSource = exAlumnos;
+                exAlumnos = conexion.BuscarExAlumnos(nombre, carrera, edad, promedio, cursando);
+                exAlumnoDGV.DataSource = exAlumnos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en la búsqueda: " + ex.Message);
+            }
         }
 
 
@@ -190,19 +219,25 @@ namespace WindowsFormEscuela
         {
             if (exAlumnoDGV.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(exAlumnoDGV.SelectedRows[0].Cells["Id"].Value);
-
-                bool eliminado = conexion.EliminarExAlumno(id);
-
-                if (eliminado)
+                try
                 {
-                    MessageBox.Show("Alumno eliminado correctamente.");
-                    exAlumnos = conexion.LeerExAlumnos();
-                    exAlumnoDGV.DataSource = exAlumnos;
+                    int id = Convert.ToInt32(exAlumnoDGV.SelectedRows[0].Cells["Id"].Value);
+                    bool eliminado = conexion.EliminarExAlumno(id);
+
+                    if (eliminado)
+                    {
+                        MessageBox.Show("Alumno eliminado correctamente.");
+                        exAlumnos = conexion.LeerExAlumnos();
+                        exAlumnoDGV.DataSource = exAlumnos;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    MessageBox.Show("Error al eliminar el alumno: " + ex.Message);
                 }
             }
             else

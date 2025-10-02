@@ -58,18 +58,25 @@ namespace WindowsFormEscuela
 
             NoDocente noDocente = new NoDocente(txtNombre.Text, edad, txtPuesto.Text, antiguedad, salario);
 
-            if (esEdicion)
+            try
             {
-                noDocente.Id = idSeleccionado;
-                conexion.EditarNoDocente(noDocente);
-            }
-            else
-            {
-                conexion.AgregarNoDocente(noDocente);
-            }
+                if (esEdicion)
+                {
+                    noDocente.Id = idSeleccionado;
+                    conexion.EditarNoDocente(noDocente);
+                }
+                else
+                {
+                    conexion.AgregarNoDocente(noDocente);
+                }
 
-            noDocentes = conexion.LeerNoDocentes();
-            noDocenteDGV.DataSource = noDocentes;
+                noDocentes = conexion.LeerNoDocentes();
+                noDocenteDGV.DataSource = noDocentes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el docente: " + ex.Message);
+            }
 
             desactivarTxts();
             limpiarTxts();
@@ -92,48 +99,69 @@ namespace WindowsFormEscuela
         {
             if (noDocenteDGV.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(noDocenteDGV.SelectedRows[0].Cells["Id"].Value);
-                bool eliminado = conexion.EliminarNoDocente(id);
+                try
+                {
+                    int id = Convert.ToInt32(noDocenteDGV.SelectedRows[0].Cells["Id"].Value);
+                    bool eliminado = conexion.EliminarNoDocente(id);
 
-                if (eliminado)
-                {
-                    MessageBox.Show("Docente eliminado correctamente.");
-                    noDocentes = conexion.LeerNoDocentes();
-                    noDocenteDGV.DataSource = noDocentes;
+                    if (eliminado)
+                    {
+                        MessageBox.Show("Docente eliminado correctamente.");
+                        noDocentes = conexion.LeerNoDocentes();
+                        noDocenteDGV.DataSource = noDocentes;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el docente. Verifica el Id.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    MessageBox.Show("Error al eliminar el docente: " + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Selecciona un alumno para eliminar.");
+                MessageBox.Show("Selecciona un docente para eliminar.");
             }
         }
 
-        private void docenteDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void noDocenteDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                txtNombre.Text = noDocenteDGV.CurrentRow.Cells["Nombre"].Value.ToString();
-                txtEdad.Text = noDocenteDGV.CurrentRow.Cells["Edad"].Value.ToString();
-                txtPuesto.Text = noDocenteDGV.CurrentRow.Cells["Puesto"].Value.ToString();
-                txtAntiguedad.Text = noDocenteDGV.CurrentRow.Cells["Antiguedad"].Value.ToString();
-                txtSalario.Text = noDocenteDGV.CurrentRow.Cells["Salario"].Value.ToString();
+                try
+                {
+                    txtNombre.Text = noDocenteDGV.CurrentRow.Cells["Nombre"].Value.ToString();
+                    txtEdad.Text = noDocenteDGV.CurrentRow.Cells["Edad"].Value.ToString();
+                    txtPuesto.Text = noDocenteDGV.CurrentRow.Cells["Puesto"].Value.ToString();
+                    txtAntiguedad.Text = noDocenteDGV.CurrentRow.Cells["Antiguedad"].Value.ToString();
+                    txtSalario.Text = noDocenteDGV.CurrentRow.Cells["Salario"].Value.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al seleccionar docente: " + ex.Message);
+                }
             }
         }
 
         private void buscarBtn_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreBuscar.Text.Trim();
-            string puesto = txtPuestoBuscar.Text.Trim();
-            string edad = txtEdadBuscar.Text.Trim();
-            string salario = txtSalarioBuscar.Text.Trim();
-            string antiguedad = txtAntiguedadBuscar.Text.Trim();
+            try
+            {
+                string nombre = txtNombreBuscar.Text.Trim();
+                string puesto = txtPuestoBuscar.Text.Trim();
+                string edad = txtEdadBuscar.Text.Trim();
+                string salario = txtSalarioBuscar.Text.Trim();
+                string antiguedad = txtAntiguedadBuscar.Text.Trim();
 
-            noDocentes = conexion.BuscarNoDocentes(nombre, puesto, edad, salario, antiguedad);
-            noDocenteDGV.DataSource = noDocentes;
+                noDocentes = conexion.BuscarNoDocentes(nombre, puesto, edad, salario, antiguedad);
+                noDocenteDGV.DataSource = noDocentes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en la búsqueda: " + ex.Message);
+            }
         }
 
         private void limpiarBtn_Click(object sender, EventArgs e)
@@ -201,9 +229,17 @@ namespace WindowsFormEscuela
             buscarBtn.Enabled = true;
         }
 
-        private void DocenteForm_Load(object sender, EventArgs e)
+        private void NoDocenteForm_Load(object sender, EventArgs e)
         {
-            noDocenteDGV.DataSource = noDocentes;
+            try
+            {
+                noDocenteDGV.DataSource = noDocentes;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar no docentes: " + ex.Message);
+            }
+
             desactivarTxts();
             desactivarBuscar();
         }

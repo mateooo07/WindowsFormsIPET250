@@ -513,7 +513,7 @@
             this.MinimizeBox = false;
             this.Name = "AlumnoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AlumnoForm";
+            this.Text = "Alumno";
             this.Load += new System.EventHandler(this.alumnoForm_Load);
             this.groupBoxBuscar.ResumeLayout(false);
             this.groupBoxBuscar.PerformLayout();
