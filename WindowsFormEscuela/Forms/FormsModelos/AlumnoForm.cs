@@ -49,10 +49,11 @@ namespace WindowsFormEscuela
         {
             errorLabel.Text = "";
 
+            // Validaciones básicas antes de tocar la DB
             if (string.IsNullOrWhiteSpace(txtCarrera.Text) ||
                 string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtEdad.Text) ||
-                string.IsNullOrWhiteSpace(txtMateria.Text)|| 
+                string.IsNullOrWhiteSpace(txtMateria.Text) ||
                 string.IsNullOrWhiteSpace(txtAño.Text) ||
                 string.IsNullOrWhiteSpace(txtNota.Text))
             {
@@ -80,22 +81,31 @@ namespace WindowsFormEscuela
 
             Cursando crs = new Cursando(txtNombre.Text, edad, txtCarrera.Text, chkCursando.Checked, txtAño.Text, txtMateria.Text, nota);
 
-            if (esEdicion)
+            try
             {
-                crs.Id = idSeleccionado;
-                conexion.EditarAlumno(crs);
-            }
-            else
-            {
-                conexion.AgregarAlumno(crs);
-            }
+                if (esEdicion)
+                {
+                    crs.Id = idSeleccionado;
+                    conexion.EditarAlumno(crs);
+                }
+                else
+                {
+                    conexion.AgregarAlumno(crs);
+                }
 
-            alumnos = conexion.LeerAlumnos();
-            alumnoDGV.DataSource = alumnos;
+                alumnos = conexion.LeerAlumnos();
+                alumnoDGV.DataSource = alumnos;
+            }
+            catch (Exception ex) // cualquier problema de SQL, conexión o parámetros
+            {
+                MessageBox.Show("Error al guardar el alumno: " + ex.Message);
+                return;
+            }
 
             desactivarTxts();
             limpiarTxts();
         }
+
 
 
         private void retrocederBtn_Click(object sender, EventArgs e)
@@ -107,36 +117,60 @@ namespace WindowsFormEscuela
 
         private void alumnoForm_Load(object sender, EventArgs e)
         {
-            alumnoDGV.DataSource = alumnos;
+            try
+            {
+                alumnoDGV.DataSource = alumnos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar alumnos: " + ex.Message);
+            }
+
             desactivarTxts();
             desactivarBuscar();
         }
+
 
         private void alumnoDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                txtNombre.Text = alumnoDGV.CurrentRow.Cells["Nombre"].Value.ToString();
-                txtCarrera.Text = alumnoDGV.CurrentRow.Cells["Carrera"].Value.ToString();
-                txtEdad.Text = alumnoDGV.CurrentRow.Cells["Edad"].Value.ToString();
-                txtAño.Text = alumnoDGV.CurrentRow.Cells["Anio"].Value.ToString();
-                txtMateria.Text = alumnoDGV.CurrentRow.Cells["Materia"].Value.ToString();
-                txtNota.Text = alumnoDGV.CurrentRow.Cells["Nota"].Value.ToString();
-                chkCursando.Checked = Convert.ToBoolean(alumnoDGV.CurrentRow.Cells["Estado"].Value);
+                try
+                {
+                    txtNombre.Text = alumnoDGV.CurrentRow.Cells["Nombre"].Value.ToString();
+                    txtCarrera.Text = alumnoDGV.CurrentRow.Cells["Carrera"].Value.ToString();
+                    txtEdad.Text = alumnoDGV.CurrentRow.Cells["Edad"].Value.ToString();
+                    txtAño.Text = alumnoDGV.CurrentRow.Cells["Anio"].Value.ToString();
+                    txtMateria.Text = alumnoDGV.CurrentRow.Cells["Materia"].Value.ToString();
+                    txtNota.Text = alumnoDGV.CurrentRow.Cells["Nota"].Value.ToString();
+                    chkCursando.Checked = Convert.ToBoolean(alumnoDGV.CurrentRow.Cells["Estado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al seleccionar alumno: " + ex.Message);
+                }
             }
         }
+
         private void buscarBtn_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreBuscar.Text.Trim();
-            string carrera = txtCarreraBuscar.Text.Trim();
-            string edad = txtEdadBuscar.Text.Trim();
-            string anio = txtAñoBuscar.Text.Trim();
-            string materia = txtMateriaBuscar.Text.Trim();
-            string nota = txtNotaBuscar.Text.Trim();
-            bool cursando = chkCursandoBuscar.Checked ? true : false;
+            try
+            {
+                string nombre = txtNombreBuscar.Text.Trim();
+                string carrera = txtCarreraBuscar.Text.Trim();
+                string edad = txtEdadBuscar.Text.Trim();
+                string anio = txtAñoBuscar.Text.Trim();
+                string materia = txtMateriaBuscar.Text.Trim();
+                string nota = txtNotaBuscar.Text.Trim();
+                bool cursando = chkCursandoBuscar.Checked ? true : false;
 
-            alumnos = conexion.BuscarAlumnos(nombre, carrera, edad, anio, materia, nota, cursando);
-            alumnoDGV.DataSource = alumnos;
+                alumnos = conexion.BuscarAlumnos(nombre, carrera, edad, anio, materia, nota, cursando);
+                alumnoDGV.DataSource = alumnos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en la búsqueda: " + ex.Message);
+            }
         }
 
 
@@ -211,19 +245,26 @@ namespace WindowsFormEscuela
         {
             if (alumnoDGV.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(alumnoDGV.SelectedRows[0].Cells["Id"].Value);
-
-                bool eliminado = conexion.EliminarAlumno(id);
-
-                if (eliminado)
+                try
                 {
-                    MessageBox.Show("Alumno eliminado correctamente.");
-                    alumnos = conexion.LeerAlumnos();
-                    alumnoDGV.DataSource = alumnos;
+                    int id = Convert.ToInt32(alumnoDGV.SelectedRows[0].Cells["Id"].Value);
+
+                    bool eliminado = conexion.EliminarAlumno(id);
+
+                    if (eliminado)
+                    {
+                        MessageBox.Show("Alumno eliminado correctamente.");
+                        alumnos = conexion.LeerAlumnos();
+                        alumnoDGV.DataSource = alumnos;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se pudo eliminar el alumno. Verifica el Id.");
+                    MessageBox.Show("Error al eliminar el alumno: " + ex.Message);
                 }
             }
             else
