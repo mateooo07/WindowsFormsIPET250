@@ -26,24 +26,31 @@ namespace WindowsFormEscuela
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string usuario = usuarioTxt.Text;
-            string contraseña = contraseñaTxt.Text;
-
-            bool loginValido = usuarioConexion.VerificarCredenciales(usuario, contraseña);
-
-            if (!loginValido)
+            try
             {
-                errorLabel.Show();
-                usuarioTxt.Text = null;
-                contraseñaTxt.Text = null;
-                return;
+                string usuario = usuarioTxt.Text;
+                string contraseña = contraseñaTxt.Text;
+
+                bool loginValido = usuarioConexion.VerificarCredenciales(usuario, contraseña);
+
+                if (!loginValido)
+                {
+                    errorLabel.Show();
+                    usuarioTxt.Text = null;
+                    contraseñaTxt.Text = null;
+                    return;
+                }
+
+                Principal formPrincipal = new Principal();
+                formPrincipal.Show();
+                this.Hide();
             }
-
-            Principal formPrincipal = new Principal();
-            formPrincipal.Show();
-            this.Hide();
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al iniciar sesión: " + ex.Message);
+            }
         }
+
 
     }
 }
